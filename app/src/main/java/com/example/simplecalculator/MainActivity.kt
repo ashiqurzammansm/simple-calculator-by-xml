@@ -1,24 +1,25 @@
 package com.example.simplecalculator
 
 import android.os.Bundle
+import android.widget.Button
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simplecalculator.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityMainBinding
 
     private var first = ""
     private var second = ""
     private var operator = ""
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Number buttons
         setNumberClick(binding.btn0, "0")
         setNumberClick(binding.btn1, "1")
         setNumberClick(binding.btn2, "2")
@@ -30,16 +31,15 @@ class MainActivity : AppCompatActivity() {
         setNumberClick(binding.btn8, "8")
         setNumberClick(binding.btn9, "9")
 
-        // Operators
         setOperator(binding.btnAdd, "+")
         setOperator(binding.btnSub, "-")
         setOperator(binding.btnMul, "*")
         setOperator(binding.btnDiv, "/")
 
-        // Equal
-        binding.btnEqual.setOnClickListener { calculate() }
+        binding.btnEqual.setOnClickListener {
+            calculate()
+        }
 
-        // AC
         binding.btnAC.setOnClickListener {
             first = ""
             second = ""
@@ -47,36 +47,38 @@ class MainActivity : AppCompatActivity() {
             binding.tvInput.text = ""
             binding.tvResult.text = ""
         }
-    }
 
-    private fun setNumberClick(button: android.widget.Button, value: String) {
+
+
+
+        }
+    private fun setNumberClick(button: android.widget.Button, value: String){
         button.setOnClickListener {
-            if (operator.isEmpty()) {
-                first += value
+            if (operator.isEmpty()){
+                first+=value
                 binding.tvInput.text = first
-            } else {
+            }else{
                 second += value
                 binding.tvInput.text = "$first $operator $second"
             }
         }
     }
 
-    private fun setOperator(button: android.widget.Button, op: String) {
+    private fun setOperator(button: android.widget.Button, op: String){
         button.setOnClickListener {
-            if (first.isNotEmpty()) {
+            if (first.isNotEmpty()){
                 operator = op
                 binding.tvInput.text = "$first $operator"
             }
         }
     }
 
-    private fun calculate() {
+    private fun calculate(){
         if (first.isEmpty() || second.isEmpty()) return
 
         val a = first.toDouble()
         val b = second.toDouble()
-
-        val result = when (operator) {
+        val result = when(operator){
             "+" -> a + b
             "-" -> a - b
             "*" -> a * b
@@ -85,5 +87,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvResult.text = result.toString()
+
+
+
+
     }
+
 }

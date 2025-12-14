@@ -8,8 +8,8 @@ android {
     compileSdk {
         version = release(36)
     }
-    buildFeatures {
-        viewBinding =true
+    buildFeatures{
+        viewBinding = true
     }
 
     defaultConfig {
